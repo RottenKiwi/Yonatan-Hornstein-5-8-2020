@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>~~Choose you'r test!~~</title>
+<style type="text/css">
+
+body{
+background:url(resources/templates/backr.png)
+}
+.multiselect {
+  width: 200px;
+}
+.selectBox {
+  position: relative;
+}
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+#checkboxes label {
+  display: block;
+}
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+
+
+</style>    
+    
+<script type="text/javascript">
+var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}
+
+</script>    
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div style="text-align: center; border: 3px solid cyan;"  >
+	<h1>InnerTester Automation</h1>
+    <form action="#" th:action="@{/test}" th:object="${test}" method="post">
+    	<div class="multiselect" style="margin: auto; width: 50%; border: 3px solid green; padding: 10px;">
+    <div class="selectBox" onclick="showCheckboxes()">
+      <select>
+        <option>Select an option</option>
+      </select>
+      <div class="overSelect"></div>
+    </div>
+    <div id="checkboxes">
+   
+        <label for="two">
+        <input type="checkbox" id="two" value="SendCorrectInfo" th:field="*{testNames}"/>Send correct information</label>
+        <label for="three">
+        <input type="checkbox" id="three" value="SendInCorrectInfo" th:field="*{testNames}"/>Send incorrect information</label>
+        <label for="four">
+        <input type="checkbox" id="four" value="SendEmptyInfo" th:field="*{testNames}"/>Send empty information</label>
+ 
+        </div>
+        </div>
+     
+        <select th:field="*{browser}">
+        <option th:value="chrome" >Chrome</option>
+        <option th:value="firefox" >Firefox</option>
+        
+        </select> 
+        
+        <p>Times to run:<input placeholder="1" type="number" min="1" value="1"  th:field="*{times}" style="margin: 2px"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+   
+    </form>
+   
+</div>    
+</body>
+</html>
